@@ -1,0 +1,55 @@
+﻿<Page x:Class="chetchik.Pages.SchetPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:chetchik.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="SchetPage">
+
+    <Border Background="#b8d3ff" HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="15">
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                <Image Source="/Resources/Images/logo.png" Width="70" Margin="5"/>
+                <Label Content="ООО «Горводоканал»" VerticalAlignment="Center" FontSize="20" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Здравствуйте пользователь!" FontWeight="Bold" Margin="5"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Width="300" Content="Введите показания горячей воды:" Margin="5"/>
+                <TextBox Width="350" Margin="5" x:Name="HotWaterBox" TextChanged="WaterBox_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Width="300" Content="Введите показания холодной воды:" Margin="5"/>
+                <TextBox Width="350" Margin="5" x:Name="ColdWaterBox" TextChanged="WaterBox_TextChanged"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5, 5, 5, 5">
+                <Label Content="За горячую воду:" FontWeight="Light" FontSize="14"/>
+                <Label x:Name="HotWaterLabel" Content="xxx" FontWeight="Light" FontSize="14"/>
+                <Label Content="рублей." FontWeight="Light" FontSize="14"/>
+                <Label Content="| Последняя запись:" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                <Label x:Name="HotWaterLastLabel" Content="xxx" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                <Label Content="| Тариф:" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                <Label x:Name="HotWaterTarifLabel" Content="xxx" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5, 5, 5, 5">
+                <Label Content="За холодную воду:" FontWeight="Light" FontSize="14"/>
+                <Label x:Name="ColdWaterLabel" Content="xxx" FontWeight="Light" FontSize="14"/>
+                <Label Content="рублей." FontWeight="Light" FontSize="14"/>
+                <Label Content="| Последняя запись:" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                <Label x:Name="ColdWaterLastLabel" Content="xxx" FontWeight="Light" FontSize="14" HorizontalAlignment="Right"/>
+                <Label Content="| Тариф:" FontWeight="Light" FontSize="14"/>
+                <Label x:Name="ColdWaterTarifLabel" Content="xxx" FontWeight="Light" FontSize="14"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="5, 5, 5, 5">
+                <Label Content="Итог:" FontWeight="Light" FontSize="14"/>
+                <Label x:Name="AllLabel" Content="xxx" FontWeight="Light" FontSize="14"/>
+                <Label Content="рублей." FontWeight="Light" FontSize="14"/>
+            </StackPanel>
+            <Button Content="Оплатить" Margin="5" x:Name="PayBTN" Click="PayBTN_Click"/>
+            <Button Content="Выйти" Margin="5" x:Name="BackBTN" Click="BackBTN_Click"/>
+        </StackPanel>
+    </Border>
+</Page>

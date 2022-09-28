@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c0f746b35fbd4f09bab9fa32a55248bb" Name="Diagram1">
+        <EntityTypeShape EntityType="chetchikModel.Адрес" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="chetchikModel.ВидСчетчика" Width="1.5" PointX="3" PointY="0.75" />
+        <EntityTypeShape EntityType="chetchikModel.Должность" Width="1.5" PointX="3.75" PointY="16.375" />
+        <EntityTypeShape EntityType="chetchikModel.Квитанция" Width="1.5" PointX="5.25" PointY="10.125" />
+        <EntityTypeShape EntityType="chetchikModel.ЛичныеДанные" Width="1.5" PointX="0.75" PointY="5" />
+        <EntityTypeShape EntityType="chetchikModel.Оплаты" Width="1.5" PointX="3" PointY="19.25" />
+        <EntityTypeShape EntityType="chetchikModel.Показания" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="chetchikModel.Пользователь" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="chetchikModel.Сотрудники" Width="1.5" PointX="6" PointY="7" />
+        <EntityTypeShape EntityType="chetchikModel.Статус" Width="1.5" PointX="0.75" PointY="19.5" />
+        <EntityTypeShape EntityType="chetchikModel.Счета" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="chetchikModel.СчетаВКвитанциях" Width="1.5" PointX="7.5" PointY="10.375" />
+        <AssociationConnector Association="chetchikModel.FK_Адрес_ЛичныеДанные" />
+        <AssociationConnector Association="chetchikModel.FK_Квитанция_Адрес" />
+        <AssociationConnector Association="chetchikModel.FK_Показания_ВидСчетчика" />
+        <AssociationConnector Association="chetchikModel.FK_Сотрудники_Должность" />
+        <AssociationConnector Association="chetchikModel.FK_Квитанция_ЛичныеДанные" />
+        <AssociationConnector Association="chetchikModel.FK_Квитанция_Оплаты" />
+        <AssociationConnector Association="chetchikModel.FK_СчетаВКвитанциях_Квитанция" />
+        <AssociationConnector Association="chetchikModel.FK_Пользователь_ЛичныеДанные" />
+        <AssociationConnector Association="chetchikModel.FK_Сотрудники_ЛичныеДанные" />
+        <AssociationConnector Association="chetchikModel.FK_Оплаты_Статус" />
+        <AssociationConnector Association="chetchikModel.FK_Оплаты_Счета" />
+        <AssociationConnector Association="chetchikModel.FK_Показания_Пользователь" />
+        <AssociationConnector Association="chetchikModel.FK_Показания_Счета" />
+        <AssociationConnector Association="chetchikModel.FK_СчетаВКвитанциях_Счета" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

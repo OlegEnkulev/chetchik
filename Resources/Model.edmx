@@ -1,0 +1,857 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище chetchikModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Адрес">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Адрес" Type="nvarchar" MaxLength="50" />
+          <Property Name="АйдиЛичныхДанных" Type="int" />
+        </EntityType>
+        <EntityType Name="ВидСчетчика">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ТарифЗаКубическийМетр" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Должность">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Квитанция">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="АйдиЛичныхДанных" Type="int" />
+          <Property Name="АйдиАдреса" Type="int" />
+          <Property Name="АйдиОплаты" Type="int" />
+        </EntityType>
+        <EntityType Name="ЛичныеДанные">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Фамилия" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Оплаты">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="АйдиСтатуса" Type="int" Nullable="false" />
+          <Property Name="Цена" Type="int" Nullable="false" />
+          <Property Name="АйдиСчета" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Показания">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="КубическиеМетры" Type="int" Nullable="false" />
+          <Property Name="Дата" Type="datetime" Nullable="false" />
+          <Property Name="АйдиПользователя" Type="int" Nullable="false" />
+          <Property Name="АйдиВидаСчетчика" Type="int" Nullable="false" />
+          <Property Name="АйдиСчета" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Логин" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="АйдиЛичныхДанных" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Логин" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Пароль" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="АйдиДожности" Type="int" Nullable="false" />
+          <Property Name="АйдиЛичныхДанных" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Статус">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Счета">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="СчетаВКвитанциях">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="АйдиСчета" Type="int" Nullable="false" />
+          <Property Name="АйдиКвитанции" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Адрес_ЛичныеДанные">
+          <End Role="ЛичныеДанные" Type="Self.ЛичныеДанные" Multiplicity="0..1" />
+          <End Role="Адрес" Type="Self.Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Адрес">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Квитанция_Адрес">
+          <End Role="Адрес" Type="Self.Адрес" Multiplicity="0..1" />
+          <End Role="Квитанция" Type="Self.Квитанция" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Адрес">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Квитанция">
+              <PropertyRef Name="АйдиАдреса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Квитанция_ЛичныеДанные">
+          <End Role="ЛичныеДанные" Type="Self.ЛичныеДанные" Multiplicity="0..1" />
+          <End Role="Квитанция" Type="Self.Квитанция" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Квитанция">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Квитанция_Оплаты">
+          <End Role="Оплаты" Type="Self.Оплаты" Multiplicity="0..1" />
+          <End Role="Квитанция" Type="Self.Квитанция" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Оплаты">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Квитанция">
+              <PropertyRef Name="АйдиОплаты" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Оплаты_Статус">
+          <End Role="Статус" Type="Self.Статус" Multiplicity="1" />
+          <End Role="Оплаты" Type="Self.Оплаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Оплаты">
+              <PropertyRef Name="АйдиСтатуса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Оплаты_Счета">
+          <End Role="Счета" Type="Self.Счета" Multiplicity="1" />
+          <End Role="Оплаты" Type="Self.Оплаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Счета">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Оплаты">
+              <PropertyRef Name="АйдиСчета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_ВидСчетчика">
+          <End Role="ВидСчетчика" Type="Self.ВидСчетчика" Multiplicity="1" />
+          <End Role="Показания" Type="Self.Показания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ВидСчетчика">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Показания">
+              <PropertyRef Name="АйдиВидаСчетчика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_Пользователь">
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="1" />
+          <End Role="Показания" Type="Self.Показания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователь">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Показания">
+              <PropertyRef Name="АйдиПользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_Счета">
+          <End Role="Счета" Type="Self.Счета" Multiplicity="1" />
+          <End Role="Показания" Type="Self.Показания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Счета">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Показания">
+              <PropertyRef Name="АйдиСчета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователь_ЛичныеДанные">
+          <End Role="ЛичныеДанные" Type="Self.ЛичныеДанные" Multiplicity="1" />
+          <End Role="Пользователь" Type="Self.Пользователь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудники_Должность">
+          <End Role="Должность" Type="Self.Должность" Multiplicity="1" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="АйдиДожности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудники_ЛичныеДанные">
+          <End Role="ЛичныеДанные" Type="Self.ЛичныеДанные" Multiplicity="1" />
+          <End Role="Сотрудники" Type="Self.Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СчетаВКвитанциях_Квитанция">
+          <End Role="Квитанция" Type="Self.Квитанция" Multiplicity="1" />
+          <End Role="СчетаВКвитанциях" Type="Self.СчетаВКвитанциях" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Квитанция">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="СчетаВКвитанциях">
+              <PropertyRef Name="АйдиКвитанции" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СчетаВКвитанциях_Счета">
+          <End Role="Счета" Type="Self.Счета" Multiplicity="1" />
+          <End Role="СчетаВКвитанциях" Type="Self.СчетаВКвитанциях" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Счета">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="СчетаВКвитанциях">
+              <PropertyRef Name="АйдиСчета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище chetchikModelContainer">
+          <EntitySet Name="Адрес" EntityType="Self.Адрес" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ВидСчетчика" EntityType="Self.ВидСчетчика" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Должность" EntityType="Self.Должность" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Квитанция" EntityType="Self.Квитанция" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ЛичныеДанные" EntityType="Self.ЛичныеДанные" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Оплаты" EntityType="Self.Оплаты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Показания" EntityType="Self.Показания" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователь" EntityType="Self.Пользователь" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Сотрудники" EntityType="Self.Сотрудники" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статус" EntityType="Self.Статус" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Счета" EntityType="Self.Счета" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="СчетаВКвитанциях" EntityType="Self.СчетаВКвитанциях" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Адрес_ЛичныеДанные" Association="Self.FK_Адрес_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Адрес" EntitySet="Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Квитанция_Адрес" Association="Self.FK_Квитанция_Адрес">
+            <End Role="Адрес" EntitySet="Адрес" />
+            <End Role="Квитанция" EntitySet="Квитанция" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Квитанция_ЛичныеДанные" Association="Self.FK_Квитанция_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Квитанция" EntitySet="Квитанция" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Квитанция_Оплаты" Association="Self.FK_Квитанция_Оплаты">
+            <End Role="Оплаты" EntitySet="Оплаты" />
+            <End Role="Квитанция" EntitySet="Квитанция" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Оплаты_Статус" Association="Self.FK_Оплаты_Статус">
+            <End Role="Статус" EntitySet="Статус" />
+            <End Role="Оплаты" EntitySet="Оплаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Оплаты_Счета" Association="Self.FK_Оплаты_Счета">
+            <End Role="Счета" EntitySet="Счета" />
+            <End Role="Оплаты" EntitySet="Оплаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_ВидСчетчика" Association="Self.FK_Показания_ВидСчетчика">
+            <End Role="ВидСчетчика" EntitySet="ВидСчетчика" />
+            <End Role="Показания" EntitySet="Показания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_Пользователь" Association="Self.FK_Показания_Пользователь">
+            <End Role="Пользователь" EntitySet="Пользователь" />
+            <End Role="Показания" EntitySet="Показания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_Счета" Association="Self.FK_Показания_Счета">
+            <End Role="Счета" EntitySet="Счета" />
+            <End Role="Показания" EntitySet="Показания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователь_ЛичныеДанные" Association="Self.FK_Пользователь_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудники_Должность" Association="Self.FK_Сотрудники_Должность">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудники_ЛичныеДанные" Association="Self.FK_Сотрудники_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СчетаВКвитанциях_Квитанция" Association="Self.FK_СчетаВКвитанциях_Квитанция">
+            <End Role="Квитанция" EntitySet="Квитанция" />
+            <End Role="СчетаВКвитанциях" EntitySet="СчетаВКвитанциях" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СчетаВКвитанциях_Счета" Association="Self.FK_СчетаВКвитанциях_Счета">
+            <End Role="Счета" EntitySet="Счета" />
+            <End Role="СчетаВКвитанциях" EntitySet="СчетаВКвитанциях" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="chetchikModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="chetchikEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Адрес" EntityType="chetchikModel.Адрес" />
+          <EntitySet Name="ВидСчетчика" EntityType="chetchikModel.ВидСчетчика" />
+          <EntitySet Name="Должность" EntityType="chetchikModel.Должность" />
+          <EntitySet Name="Квитанция" EntityType="chetchikModel.Квитанция" />
+          <EntitySet Name="ЛичныеДанные" EntityType="chetchikModel.ЛичныеДанные" />
+          <EntitySet Name="Оплаты" EntityType="chetchikModel.Оплаты" />
+          <EntitySet Name="Показания" EntityType="chetchikModel.Показания" />
+          <EntitySet Name="Пользователь" EntityType="chetchikModel.Пользователь" />
+          <EntitySet Name="Сотрудники" EntityType="chetchikModel.Сотрудники" />
+          <EntitySet Name="Статус" EntityType="chetchikModel.Статус" />
+          <EntitySet Name="Счета" EntityType="chetchikModel.Счета" />
+          <EntitySet Name="СчетаВКвитанциях" EntityType="chetchikModel.СчетаВКвитанциях" />
+          <AssociationSet Name="FK_Адрес_ЛичныеДанные" Association="chetchikModel.FK_Адрес_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Адрес" EntitySet="Адрес" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Квитанция_Адрес" Association="chetchikModel.FK_Квитанция_Адрес">
+            <End Role="Адрес" EntitySet="Адрес" />
+            <End Role="Квитанция" EntitySet="Квитанция" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_ВидСчетчика" Association="chetchikModel.FK_Показания_ВидСчетчика">
+            <End Role="ВидСчетчика" EntitySet="ВидСчетчика" />
+            <End Role="Показания" EntitySet="Показания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудники_Должность" Association="chetchikModel.FK_Сотрудники_Должность">
+            <End Role="Должность" EntitySet="Должность" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Квитанция_ЛичныеДанные" Association="chetchikModel.FK_Квитанция_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Квитанция" EntitySet="Квитанция" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Квитанция_Оплаты" Association="chetchikModel.FK_Квитанция_Оплаты">
+            <End Role="Оплаты" EntitySet="Оплаты" />
+            <End Role="Квитанция" EntitySet="Квитанция" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СчетаВКвитанциях_Квитанция" Association="chetchikModel.FK_СчетаВКвитанциях_Квитанция">
+            <End Role="Квитанция" EntitySet="Квитанция" />
+            <End Role="СчетаВКвитанциях" EntitySet="СчетаВКвитанциях" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Пользователь_ЛичныеДанные" Association="chetchikModel.FK_Пользователь_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Пользователь" EntitySet="Пользователь" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Сотрудники_ЛичныеДанные" Association="chetchikModel.FK_Сотрудники_ЛичныеДанные">
+            <End Role="ЛичныеДанные" EntitySet="ЛичныеДанные" />
+            <End Role="Сотрудники" EntitySet="Сотрудники" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Оплаты_Статус" Association="chetchikModel.FK_Оплаты_Статус">
+            <End Role="Статус" EntitySet="Статус" />
+            <End Role="Оплаты" EntitySet="Оплаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Оплаты_Счета" Association="chetchikModel.FK_Оплаты_Счета">
+            <End Role="Счета" EntitySet="Счета" />
+            <End Role="Оплаты" EntitySet="Оплаты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_Пользователь" Association="chetchikModel.FK_Показания_Пользователь">
+            <End Role="Пользователь" EntitySet="Пользователь" />
+            <End Role="Показания" EntitySet="Показания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Показания_Счета" Association="chetchikModel.FK_Показания_Счета">
+            <End Role="Счета" EntitySet="Счета" />
+            <End Role="Показания" EntitySet="Показания" />
+          </AssociationSet>
+          <AssociationSet Name="FK_СчетаВКвитанциях_Счета" Association="chetchikModel.FK_СчетаВКвитанциях_Счета">
+            <End Role="Счета" EntitySet="Счета" />
+            <End Role="СчетаВКвитанциях" EntitySet="СчетаВКвитанциях" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Адрес">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Адрес1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="АйдиЛичныхДанных" Type="Int32" />
+          <NavigationProperty Name="ЛичныеДанные" Relationship="chetchikModel.FK_Адрес_ЛичныеДанные" FromRole="Адрес" ToRole="ЛичныеДанные" />
+          <NavigationProperty Name="Квитанция" Relationship="chetchikModel.FK_Квитанция_Адрес" FromRole="Адрес" ToRole="Квитанция" />
+        </EntityType>
+        <EntityType Name="ВидСчетчика">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ТарифЗаКубическийМетр" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Показания" Relationship="chetchikModel.FK_Показания_ВидСчетчика" FromRole="ВидСчетчика" ToRole="Показания" />
+        </EntityType>
+        <EntityType Name="Должность">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Сотрудники" Relationship="chetchikModel.FK_Сотрудники_Должность" FromRole="Должность" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Квитанция">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="АйдиЛичныхДанных" Type="Int32" />
+          <Property Name="АйдиАдреса" Type="Int32" />
+          <Property Name="АйдиОплаты" Type="Int32" />
+          <NavigationProperty Name="Адрес" Relationship="chetchikModel.FK_Квитанция_Адрес" FromRole="Квитанция" ToRole="Адрес" />
+          <NavigationProperty Name="ЛичныеДанные" Relationship="chetchikModel.FK_Квитанция_ЛичныеДанные" FromRole="Квитанция" ToRole="ЛичныеДанные" />
+          <NavigationProperty Name="Оплаты" Relationship="chetchikModel.FK_Квитанция_Оплаты" FromRole="Квитанция" ToRole="Оплаты" />
+          <NavigationProperty Name="СчетаВКвитанциях" Relationship="chetchikModel.FK_СчетаВКвитанциях_Квитанция" FromRole="Квитанция" ToRole="СчетаВКвитанциях" />
+        </EntityType>
+        <EntityType Name="ЛичныеДанные">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Фамилия" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Адрес" Relationship="chetchikModel.FK_Адрес_ЛичныеДанные" FromRole="ЛичныеДанные" ToRole="Адрес" />
+          <NavigationProperty Name="Квитанция" Relationship="chetchikModel.FK_Квитанция_ЛичныеДанные" FromRole="ЛичныеДанные" ToRole="Квитанция" />
+          <NavigationProperty Name="Пользователь" Relationship="chetchikModel.FK_Пользователь_ЛичныеДанные" FromRole="ЛичныеДанные" ToRole="Пользователь" />
+          <NavigationProperty Name="Сотрудники" Relationship="chetchikModel.FK_Сотрудники_ЛичныеДанные" FromRole="ЛичныеДанные" ToRole="Сотрудники" />
+        </EntityType>
+        <EntityType Name="Оплаты">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="АйдиСтатуса" Type="Int32" Nullable="false" />
+          <Property Name="Цена" Type="Int32" Nullable="false" />
+          <Property Name="АйдиСчета" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Квитанция" Relationship="chetchikModel.FK_Квитанция_Оплаты" FromRole="Оплаты" ToRole="Квитанция" />
+          <NavigationProperty Name="Статус" Relationship="chetchikModel.FK_Оплаты_Статус" FromRole="Оплаты" ToRole="Статус" />
+          <NavigationProperty Name="Счета" Relationship="chetchikModel.FK_Оплаты_Счета" FromRole="Оплаты" ToRole="Счета" />
+        </EntityType>
+        <EntityType Name="Показания">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="КубическиеМетры" Type="Int32" Nullable="false" />
+          <Property Name="Дата" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="АйдиПользователя" Type="Int32" Nullable="false" />
+          <Property Name="АйдиВидаСчетчика" Type="Int32" Nullable="false" />
+          <Property Name="АйдиСчета" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ВидСчетчика" Relationship="chetchikModel.FK_Показания_ВидСчетчика" FromRole="Показания" ToRole="ВидСчетчика" />
+          <NavigationProperty Name="Пользователь" Relationship="chetchikModel.FK_Показания_Пользователь" FromRole="Показания" ToRole="Пользователь" />
+          <NavigationProperty Name="Счета" Relationship="chetchikModel.FK_Показания_Счета" FromRole="Показания" ToRole="Счета" />
+        </EntityType>
+        <EntityType Name="Пользователь">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Пароль" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="АйдиЛичныхДанных" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ЛичныеДанные" Relationship="chetchikModel.FK_Пользователь_ЛичныеДанные" FromRole="Пользователь" ToRole="ЛичныеДанные" />
+          <NavigationProperty Name="Показания" Relationship="chetchikModel.FK_Показания_Пользователь" FromRole="Пользователь" ToRole="Показания" />
+        </EntityType>
+        <EntityType Name="Сотрудники">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Логин" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Пароль" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="АйдиДожности" Type="Int32" Nullable="false" />
+          <Property Name="АйдиЛичныхДанных" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Должность" Relationship="chetchikModel.FK_Сотрудники_Должность" FromRole="Сотрудники" ToRole="Должность" />
+          <NavigationProperty Name="ЛичныеДанные" Relationship="chetchikModel.FK_Сотрудники_ЛичныеДанные" FromRole="Сотрудники" ToRole="ЛичныеДанные" />
+        </EntityType>
+        <EntityType Name="Статус">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Оплаты" Relationship="chetchikModel.FK_Оплаты_Статус" FromRole="Статус" ToRole="Оплаты" />
+        </EntityType>
+        <EntityType Name="Счета">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Оплаты" Relationship="chetchikModel.FK_Оплаты_Счета" FromRole="Счета" ToRole="Оплаты" />
+          <NavigationProperty Name="Показания" Relationship="chetchikModel.FK_Показания_Счета" FromRole="Счета" ToRole="Показания" />
+          <NavigationProperty Name="СчетаВКвитанциях" Relationship="chetchikModel.FK_СчетаВКвитанциях_Счета" FromRole="Счета" ToRole="СчетаВКвитанциях" />
+        </EntityType>
+        <EntityType Name="СчетаВКвитанциях">
+          <Key>
+            <PropertyRef Name="Айди" />
+          </Key>
+          <Property Name="Айди" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="АйдиСчета" Type="Int32" Nullable="false" />
+          <Property Name="АйдиКвитанции" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Квитанция" Relationship="chetchikModel.FK_СчетаВКвитанциях_Квитанция" FromRole="СчетаВКвитанциях" ToRole="Квитанция" />
+          <NavigationProperty Name="Счета" Relationship="chetchikModel.FK_СчетаВКвитанциях_Счета" FromRole="СчетаВКвитанциях" ToRole="Счета" />
+        </EntityType>
+        <Association Name="FK_Адрес_ЛичныеДанные">
+          <End Type="chetchikModel.ЛичныеДанные" Role="ЛичныеДанные" Multiplicity="0..1" />
+          <End Type="chetchikModel.Адрес" Role="Адрес" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Адрес">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Квитанция_Адрес">
+          <End Type="chetchikModel.Адрес" Role="Адрес" Multiplicity="0..1" />
+          <End Type="chetchikModel.Квитанция" Role="Квитанция" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Адрес">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Квитанция">
+              <PropertyRef Name="АйдиАдреса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_ВидСчетчика">
+          <End Type="chetchikModel.ВидСчетчика" Role="ВидСчетчика" Multiplicity="1" />
+          <End Type="chetchikModel.Показания" Role="Показания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ВидСчетчика">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Показания">
+              <PropertyRef Name="АйдиВидаСчетчика" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудники_Должность">
+          <End Type="chetchikModel.Должность" Role="Должность" Multiplicity="1" />
+          <End Type="chetchikModel.Сотрудники" Role="Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Должность">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="АйдиДожности" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Квитанция_ЛичныеДанные">
+          <End Type="chetchikModel.ЛичныеДанные" Role="ЛичныеДанные" Multiplicity="0..1" />
+          <End Type="chetchikModel.Квитанция" Role="Квитанция" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Квитанция">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Квитанция_Оплаты">
+          <End Type="chetchikModel.Оплаты" Role="Оплаты" Multiplicity="0..1" />
+          <End Type="chetchikModel.Квитанция" Role="Квитанция" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Оплаты">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Квитанция">
+              <PropertyRef Name="АйдиОплаты" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СчетаВКвитанциях_Квитанция">
+          <End Type="chetchikModel.Квитанция" Role="Квитанция" Multiplicity="1" />
+          <End Type="chetchikModel.СчетаВКвитанциях" Role="СчетаВКвитанциях" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Квитанция">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="СчетаВКвитанциях">
+              <PropertyRef Name="АйдиКвитанции" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Пользователь_ЛичныеДанные">
+          <End Type="chetchikModel.ЛичныеДанные" Role="ЛичныеДанные" Multiplicity="1" />
+          <End Type="chetchikModel.Пользователь" Role="Пользователь" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Пользователь">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Сотрудники_ЛичныеДанные">
+          <End Type="chetchikModel.ЛичныеДанные" Role="ЛичныеДанные" Multiplicity="1" />
+          <End Type="chetchikModel.Сотрудники" Role="Сотрудники" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ЛичныеДанные">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Сотрудники">
+              <PropertyRef Name="АйдиЛичныхДанных" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Оплаты_Статус">
+          <End Type="chetchikModel.Статус" Role="Статус" Multiplicity="1" />
+          <End Type="chetchikModel.Оплаты" Role="Оплаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Статус">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Оплаты">
+              <PropertyRef Name="АйдиСтатуса" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Оплаты_Счета">
+          <End Type="chetchikModel.Счета" Role="Счета" Multiplicity="1" />
+          <End Type="chetchikModel.Оплаты" Role="Оплаты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Счета">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Оплаты">
+              <PropertyRef Name="АйдиСчета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_Пользователь">
+          <End Type="chetchikModel.Пользователь" Role="Пользователь" Multiplicity="1" />
+          <End Type="chetchikModel.Показания" Role="Показания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователь">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Показания">
+              <PropertyRef Name="АйдиПользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Показания_Счета">
+          <End Type="chetchikModel.Счета" Role="Счета" Multiplicity="1" />
+          <End Type="chetchikModel.Показания" Role="Показания" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Счета">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="Показания">
+              <PropertyRef Name="АйдиСчета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_СчетаВКвитанциях_Счета">
+          <End Type="chetchikModel.Счета" Role="Счета" Multiplicity="1" />
+          <End Type="chetchikModel.СчетаВКвитанциях" Role="СчетаВКвитанциях" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Счета">
+              <PropertyRef Name="Айди" />
+            </Principal>
+            <Dependent Role="СчетаВКвитанциях">
+              <PropertyRef Name="АйдиСчета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище chetchikModelContainer" CdmEntityContainer="chetchikEntities">
+          <EntitySetMapping Name="Адрес">
+            <EntityTypeMapping TypeName="chetchikModel.Адрес">
+              <MappingFragment StoreEntitySet="Адрес">
+                <ScalarProperty Name="АйдиЛичныхДанных" ColumnName="АйдиЛичныхДанных" />
+                <ScalarProperty Name="Адрес1" ColumnName="Адрес" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ВидСчетчика">
+            <EntityTypeMapping TypeName="chetchikModel.ВидСчетчика">
+              <MappingFragment StoreEntitySet="ВидСчетчика">
+                <ScalarProperty Name="ТарифЗаКубическийМетр" ColumnName="ТарифЗаКубическийМетр" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Должность">
+            <EntityTypeMapping TypeName="chetchikModel.Должность">
+              <MappingFragment StoreEntitySet="Должность">
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Квитанция">
+            <EntityTypeMapping TypeName="chetchikModel.Квитанция">
+              <MappingFragment StoreEntitySet="Квитанция">
+                <ScalarProperty Name="АйдиОплаты" ColumnName="АйдиОплаты" />
+                <ScalarProperty Name="АйдиАдреса" ColumnName="АйдиАдреса" />
+                <ScalarProperty Name="АйдиЛичныхДанных" ColumnName="АйдиЛичныхДанных" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ЛичныеДанные">
+            <EntityTypeMapping TypeName="chetchikModel.ЛичныеДанные">
+              <MappingFragment StoreEntitySet="ЛичныеДанные">
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Оплаты">
+            <EntityTypeMapping TypeName="chetchikModel.Оплаты">
+              <MappingFragment StoreEntitySet="Оплаты">
+                <ScalarProperty Name="АйдиСчета" ColumnName="АйдиСчета" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="АйдиСтатуса" ColumnName="АйдиСтатуса" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Показания">
+            <EntityTypeMapping TypeName="chetchikModel.Показания">
+              <MappingFragment StoreEntitySet="Показания">
+                <ScalarProperty Name="АйдиСчета" ColumnName="АйдиСчета" />
+                <ScalarProperty Name="АйдиВидаСчетчика" ColumnName="АйдиВидаСчетчика" />
+                <ScalarProperty Name="АйдиПользователя" ColumnName="АйдиПользователя" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="КубическиеМетры" ColumnName="КубическиеМетры" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователь">
+            <EntityTypeMapping TypeName="chetchikModel.Пользователь">
+              <MappingFragment StoreEntitySet="Пользователь">
+                <ScalarProperty Name="АйдиЛичныхДанных" ColumnName="АйдиЛичныхДанных" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники">
+            <EntityTypeMapping TypeName="chetchikModel.Сотрудники">
+              <MappingFragment StoreEntitySet="Сотрудники">
+                <ScalarProperty Name="АйдиЛичныхДанных" ColumnName="АйдиЛичныхДанных" />
+                <ScalarProperty Name="АйдиДожности" ColumnName="АйдиДожности" />
+                <ScalarProperty Name="Пароль" ColumnName="Пароль" />
+                <ScalarProperty Name="Логин" ColumnName="Логин" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статус">
+            <EntityTypeMapping TypeName="chetchikModel.Статус">
+              <MappingFragment StoreEntitySet="Статус">
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Счета">
+            <EntityTypeMapping TypeName="chetchikModel.Счета">
+              <MappingFragment StoreEntitySet="Счета">
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="СчетаВКвитанциях">
+            <EntityTypeMapping TypeName="chetchikModel.СчетаВКвитанциях">
+              <MappingFragment StoreEntitySet="СчетаВКвитанциях">
+                <ScalarProperty Name="АйдиКвитанции" ColumnName="АйдиКвитанции" />
+                <ScalarProperty Name="АйдиСчета" ColumnName="АйдиСчета" />
+                <ScalarProperty Name="Айди" ColumnName="Айди" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
